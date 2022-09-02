@@ -1,12 +1,12 @@
-import Layout from '../../components/layout'
-import { getAllPostIds, getPostData } from '../../lib/posts'
-import Head from 'next/head'
-import Date from '../../components/date'
+import Layout from '../../components/layout';
+import { getAllPostIds, getPostData } from '../../lib/posts';
+import Head from 'next/head';
+import Date from '../../components/date';
 
 export default function Post({ postData }) {
-    return (
-      <Layout>
-        <Head>
+  return (
+    <Layout>
+      <Head>
         <title>{postData.title}</title>
       </Head>
       <article>
@@ -16,24 +16,23 @@ export default function Post({ postData }) {
         </div>
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
       </article>
-      </Layout>
-    )
-  }
-  
+    </Layout>
+  );
+}
 
 export async function getStaticPaths() {
-    const paths = getAllPostIds()
-    return {
-      paths,
-      fallback: false
-    }
-  }
-  
-  export async function getStaticProps({ params }) {
-    const postData = getPostData(params.id)
-    return {
-      props: {
-        postData
-      }
-    }
-  }
+  const paths = getAllPostIds();
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const postData = getPostData(params.id);
+  return {
+    props: {
+      postData,
+    },
+  };
+}
